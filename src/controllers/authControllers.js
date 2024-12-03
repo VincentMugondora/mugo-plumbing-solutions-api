@@ -1,3 +1,4 @@
+// src/controllers/authController.js
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
@@ -35,17 +36,13 @@ exports.login = async (req, res) => {
     const token = jwt.sign(
       { id: user._id, role: user.role },
       process.env.JWT_SECRET,
-      {
-        expiresIn: "1d",
-      }
+      { expiresIn: "1d" }
     );
 
-    res
-      .status(200)
-      .json({
-        token,
-        user: { id: user._id, name: user.name, role: user.role },
-      });
+    res.status(200).json({
+      token,
+      user: { id: user._id, name: user.name, role: user.role },
+    });
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }
@@ -55,6 +52,9 @@ exports.login = async (req, res) => {
 exports.getCurrentUser = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ message: "Server error", error });

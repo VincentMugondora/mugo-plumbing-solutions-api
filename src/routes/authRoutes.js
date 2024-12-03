@@ -7,8 +7,13 @@ const {
 } = require("../controllers/authControllers");
 const { authMiddleware } = require("../middleware/authMiddleware");
 
+// Register route
 router.post("/register", register);
+
+// Login route
 router.post("/login", login);
-router.get("/me", authMiddleware, getCurrentUser);
+
+// Get current logged-in user's profile
+router.get("/profile", authMiddleware, getCurrentUser);
 
 module.exports = router;
