@@ -1,8 +1,14 @@
 const express = require("express");
-const router = express.Router();
-const { createBooking } = require("../controllers/bookingController"); // Ensure this path is correct
+const {
+  createBooking,
+  getBookings,
+  getBookingsByUser,
+} = require("../controllers/bookingController");
 
-// Route to create a new booking
-router.post("/bookings", createBooking); // Ensure createBooking is defined and imported correctly
+const router = express.Router();
+
+router.post("/bookings", createBooking); 
+router.get("/bookings", getBookings); 
+router.get("/bookings/user/:userId", getBookingsByUser); 
 
 module.exports = router;
