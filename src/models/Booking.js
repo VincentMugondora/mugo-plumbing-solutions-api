@@ -13,8 +13,9 @@ const bookingSchema = new mongoose.Schema({
   fees: { type: Number, required: true },
   status: { type: String, default: "pending" },
   user: {
-    id: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
-    name: { type: String, required: true },
+    id: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User " },
+    name: { type: String, required: true }, 
+    email: { type: String, required: true }, 
     role: { type: String, required: true },
   },
   createdAt: { type: Date, default: Date.now },

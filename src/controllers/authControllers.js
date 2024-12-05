@@ -1,8 +1,6 @@
-// src/controllers/authController.js
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
-// Register
 exports.register = async (req, res) => {
   const { name, email, password, role } = req.body;
 
@@ -14,13 +12,12 @@ exports.register = async (req, res) => {
     const user = new User({ name, email, password, role });
     await user.save();
 
-    res.status(201).json({ message: "User registered successfully" });
+    res.status(201).json({ message: "User  registered successfully" });
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }
 };
 
-// Login
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -48,14 +45,11 @@ exports.login = async (req, res) => {
   }
 };
 
-// Get Current User
-exports.getCurrentUser = async (req, res) => {
+// New function to get all users
+exports.getAllUsers = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-    res.status(200).json(user);
+    const users = await User.find(); // Fetch all users from the database
+    res.status(200).json(users); // Return the users in the response
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }

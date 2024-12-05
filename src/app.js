@@ -6,11 +6,14 @@ const bookingRoutes = require("./routes/bookingRoutes");
 const plumberRoutes = require("./routes/plumberRoutes");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+// const path = require("path");
 
 const app = express();
 
 // Database connection
 connectDB();
+
+app.use(express.urlencoded({extended:false}))
 
 // CORS setup
 const corsOptions = {
@@ -24,6 +27,10 @@ app.use(cors(corsOptions));
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
+
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "build", "index.html"));
+// });
 
 // Routes
 app.use("/api/auth", authRoutes);

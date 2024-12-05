@@ -14,10 +14,20 @@ const createBooking = async (req, res) => {
       user,
     } = req.body;
 
-    if (!plumberId || !appointmentDate || !appointmentTime || !fees || !user) {
+    // Validate required fields
+    if (
+      !plumberId ||
+      !appointmentDate ||
+      !appointmentTime ||
+      !fees ||
+      !user ||
+      !user.name ||
+      !user.email
+    ) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
+    // Create a new booking
     const booking = new Booking({
       plumberId,
       plumberName,
@@ -26,9 +36,10 @@ const createBooking = async (req, res) => {
       appointmentTime,
       fees,
       status,
-      user,
+      user, 
     });
 
+    // Save the booking to the database
     await booking.save();
     res.status(201).json(booking);
   } catch (error) {
@@ -40,21 +51,19 @@ const createBooking = async (req, res) => {
 // Get all bookings
 const getBookings = async (req, res) => {
   try {
-    // Retrieve all bookings from the database
+    console.log("Fetching all bookings..."); 
     const bookings = await Booking.find();
-
-    // Respond with the retrieved bookings
+    console.log("Bookings retrieved:", bookings); 
     res.status(200).json(bookings);
   } catch (error) {
-    console.error("Error fetching bookings:", error);
+    console.error("Error fetching bookings:", error); 
     res
       .status(500)
       .json({ error: "Failed to fetch bookings. Please try again." });
   }
 };
 
-
-// get booking by user
+// Get bookings by user
 const getBookingsByUser = async (req, res) => {
   const { userId } = req.params;
 
