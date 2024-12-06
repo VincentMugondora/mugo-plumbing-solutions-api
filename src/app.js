@@ -6,7 +6,8 @@ const bookingRoutes = require("./routes/bookingRoutes");
 const plumberRoutes = require("./routes/plumberRoutes");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-// const path = require("path");
+const trafficRoutes = require("./routes/trafficRoutes");
+const analyticsRoutes = require("./routes/analtyticsRoutes");
 
 const app = express();
 
@@ -28,14 +29,12 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "build", "index.html"));
-// });
-
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api", bookingRoutes);
 app.use("/api/plumbers", plumberRoutes);
+app.use("/api", trafficRoutes);
+app.use("/api/analytics", analyticsRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
