@@ -29,6 +29,10 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
+app.get('/', (req, res)=>{
+  res.send("Welcome TO Mugo Plumbing Solutions By Vincent Mugondora");
+})
+
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api", bookingRoutes);
