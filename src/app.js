@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.get('/', (req, res)=>{
-  res.send("Welcome TO Mugo Plumbing Solutions By Vincent Mugondora");
+  res.send("Welcome TO Mugo Plumbing Solutions By Vincent Mugondora aka Mugo Plumbers");
 })
 
 // Routes
