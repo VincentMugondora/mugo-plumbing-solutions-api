@@ -18,7 +18,7 @@ app.use(express.urlencoded({extended:false}))
 
 // CORS setup
 const corsOptions = {
-  origin: "http://localhost:5173", 
+  origin: "https://mugo-plumbing-solutions-client.vercel.app", 
   methods: "GET,POST,PUT,DELETE",
   credentials: true,
 };
