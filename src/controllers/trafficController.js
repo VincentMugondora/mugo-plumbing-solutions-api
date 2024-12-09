@@ -9,7 +9,7 @@ const trafficData = {
     "Saturday",
     "Sunday",
   ],
-  values: [120, 150, 170, 200, 300, 250, 400], // Example traffic counts per day
+  values: [120, 150, 170, 200, 300, 250, 400], 
 };
 
 // Controller function to handle traffic data request

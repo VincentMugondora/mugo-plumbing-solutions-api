@@ -6,6 +6,9 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   role: { type: String, enum: ["admin", "plumber", "user"], default: "user" },
+  phoneNumber: { type: String },
+  address: { type: String },
+  avatar: { type: String }, // Add the avatar field for the profile picture
 });
 
 userSchema.pre("save", async function (next) {
