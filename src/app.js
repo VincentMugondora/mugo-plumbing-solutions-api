@@ -4,6 +4,7 @@ const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const plumberRoutes = require("./routes/plumberRoutes");
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const trafficRoutes = require("./routes/trafficRoutes");
 const analyticsRoutes = require("./routes/analtyticsRoutes");
@@ -18,22 +19,28 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
 
-// Custom CORS middleware
-app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://mugo-plumbing-solutions-final.app.genez.io"
-  );
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE"); // Added allowed methods
-  next();
-});
+// CORS setup
+const allowedOrigins = [
+  "https://mugo-plumbing-solutions-final.app.genez.io",
+  "https://mugo-plumbing-solutions-client.vercel.app/"
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true); // Allow the request
+    } else {
+      callback(new Error('Not allowed by CORS')); // Reject the request
+    }
+  },
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 // Welcome route
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   res.send("Welcome to Mugo Plumbing Solutions by Vincent Mugondora");
 });
 
