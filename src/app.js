@@ -18,7 +18,7 @@ app.use(express.urlencoded({extended:false}))
 
 // CORS setup
 const corsOptions = {
-  origin: "https://mugo-plumbing-solutions-client.vercel.app", 
+  origin: "https://mugo-plumbing-solutions-final.app.genez.io/", 
   methods: "GET,POST,PUT,DELETE",
   credentials: true,
 };
@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.get('/', (req, res)=>{
-  res.send("Welcome TO Mugo Plumbing Solutions By Vincent Mugondora aka Mugo Plumbers");
+  res.send("Welcome TO Mugo Plumbing Solutions By Vincent Mugondora");
 })
 
 // Routes
